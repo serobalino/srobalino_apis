@@ -22,18 +22,22 @@ namespace GitHub
         {
             public string resultado { get; set; }
             public string errores { get; set; }
+
+            public string ruta { get; set; }
         }
 
         [WebMethod]
         public respuesta Ejecutar()
         {
-            string path = Server.MapPath("actualizar.bat");
+            string path = Server.MapPath("");
             /*Process.Start(@path);
             return "Se ha ejecutado correctamente ";
             */
             Process process = new Process();
-            process.StartInfo.FileName = path;
+
+            process.StartInfo.FileName = path+"/actualizar.bat";
             process.StartInfo.UseShellExecute = false;
+            process.StartInfo.Arguments=path;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;
             process.Start();
@@ -41,6 +45,7 @@ namespace GitHub
             respuesta a = new respuesta();
             a.resultado = process.StandardOutput.ReadToEnd();
             a.errores = process.StandardError.ReadToEnd();
+            a.ruta = path;
             process.WaitForExit();
         
             return (a);
