@@ -34,10 +34,10 @@ namespace GitHub
             return "Se ha ejecutado correctamente ";
             */
             Process process = new Process();
-
+        
             process.StartInfo.FileName = path+"/actualizar.bat";
             process.StartInfo.UseShellExecute = false;
-            process.StartInfo.Arguments=path;
+            process.StartInfo.WorkingDirectory = path;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;
             process.Start();
