@@ -21,5 +21,4 @@ public interface IServicio
 
     [OperationContract]
     computadoras Insertar(computadoras datos);
-
 }
